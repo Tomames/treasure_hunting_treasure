@@ -1,0 +1,29 @@
+{extend name="Public/base"}
+{block name="title"}
+    会员中心
+{/block}
+{block name="body"}
+<div class="row weui_btn_primary weui-header"><a href="javascript:;" id="myPoint" class="col-25"
+                                                 style="height:40px; color: white;font-size: 18px; text-align:center; line-height: 40px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">我的账号</a>
+    <div class="col-50"
+         style="height:40px; color: white;font-size: 18px; text-align:center;line-height: 40px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+        寻亲宝定位
+    </div>
+    <a href="javascript:;" id="refresh" class="col-25"
+       style="height:40px; color: white;font-size: 18px; text-align:center;line-height: 40px;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">刷新</a>
+</div>
+<div class="weui_btn_area"><a href="javascript:;" id="getred" class="weui_btn weui_btn_primary"
+                              style="background-color:#f74634;">开通红包定位</a></div>
+<div class="weui_btn_area"><a href="javascript:;" id="addMember" class="weui_btn weui_btn_primary">添加一个定位目标</a></div>
+<div class="weui_cells_title">普通用户可以添加20个目标链接</div>
+<div class="weui_cells_title"></div>
+<div class="weui_cells weui_cells_access" id="list">
+</div>
+<div class="weui_btn_area"><a href="javascript:;" id="helpButton" class="weui_btn weui_btn_primary">帮助教程</a></div>
+<div class="weui_btn_area"><a href="javascript:;" id="deleteButton" class="weui_btn weui_btn_primary">删除定位目标</a></div>
+<br>
+<br>
+{/block}
+{block name="js"}
+
+{/block}

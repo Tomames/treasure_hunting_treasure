@@ -18,10 +18,19 @@ return [
         ':id' => ['index/hello', ['method' => 'get'], ['id' => '\d+']],
         ':name' => ['index/hello', ['method' => 'post']],
     ],
-    '/'=>'app/Girl/index',
-    '/getCategories'=>'app/Girl/getCategories',
-    '/getAlbums'=>'app/Girl/getAlbums',
-    '/getImages'=>'app/Girl/getImages',
-    '/getNowVersion'=>'app/Girl/getNowVersion'
+
+//    会员
+    '/'=>'home/Index/login',
+    '/register'=>'home/Index/register',
+    '/user'=>'home/User/user',
+    '/articleLocation'=>'home/User/articleLocation',
+    '/articleList'=>'home/User/articleList',
+    '/articleFrom'=>'home/User/articleFrom',
+    '/addTarget'=>'home/User/addTarget',
+
+
+//    后台
+    '/admin/login'=>'admin/Index/login',
+    'admin/index'=>'admin/Admin/index',
 
 ];
