@@ -16,9 +16,7 @@ class UserManager extends Base{
     public function __construct(Request $request = null)
     {
         parent::__construct($request);
-
         $this->userModel = new UserModel();
-
     }
 
 
