@@ -11,10 +11,7 @@ use think\Controller;
 class Index extends Controller {
 
     public function login(){
-        return "index";
+        return view();
     }
 
-    public function register(){
-        return "register";
-    }
 }

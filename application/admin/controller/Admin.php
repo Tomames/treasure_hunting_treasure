@@ -12,4 +12,9 @@ class Admin extends Base{
         return view();
     }
 
+
+    public function userManager(){
+        return view();
+    }
+
 }

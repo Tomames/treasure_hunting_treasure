@@ -32,5 +32,6 @@ return [
 //    后台
     '/admin/login'=>'admin/Index/login',
     'admin/index'=>'admin/Admin/index',
+    'admin/userManager'=>'admin/Admin/userManager',
 
 ];
