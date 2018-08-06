@@ -32,6 +32,13 @@ return [
 //    后台
     '/admin/login'=>'admin/Index/login',
     'admin/index'=>'admin/Admin/index',
-    'admin/userManager'=>'admin/Admin/userManager',
+
+    'admin/user/list'=>'admin/UserManager/uList',
+    'admin/user/add'=>'admin/UserManager/add',
+    'admin/user/save'=>'admin/UserManager/save',
+    'admin/user/del'=>'admin/UserManager/del',
+
+
+
 
 ];
