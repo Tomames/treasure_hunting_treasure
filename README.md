@@ -1,1 +1,7 @@
 寻亲宝
+1.前端控制器和视图在application/home下面
+2.后端控制器和视图在application/admin下面
+
+我把后端框架Hui的代码已经拷贝到了public/static/hui里面，可以直接在里面复制模板
+
+建议每个控制器方法都配置路由访问
