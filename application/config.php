@@ -77,7 +77,7 @@ return [
     // PATHINFO变量名 用于兼容模式
     'var_pathinfo'           => 's',
     // 兼容PATH_INFO获取
-    'pathinfo_fetch'         => ['ORIG_PATH_INFO', 'REDIRECT_PATH_INFO', 'REDIRECT_URL'],
+    'pathinfo_fetch'         => ['ORIG_PATH_INFO', 'REDIRECT_PATH_INFO', 'REDIRECT_URL','REQUEST_URI'],
     // pathinfo分隔符
     'pathinfo_depr'          => '/',
     // URL伪静态后缀
@@ -256,5 +256,10 @@ return [
         'length'   => 4,
         // 验证成功后是否重置
         'reset'    => true
+    ],
+
+    //加盐加密
+    'encrypt' =>[
+        'salt' => 'xqb',
     ],
 ];

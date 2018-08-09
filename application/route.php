@@ -31,7 +31,8 @@ return [
 
 //    后台
     '/admin/login'=>'admin/Index/login',
-    'admin/index'=>'admin/Admin/index',
+    '/admin/admin/login' => 'admin/Admin/login',
+    '/admin/index'=>'admin/Admin/index',
 
     'admin/user/list'=>'admin/UserManager/uList',
     'admin/user/add'=>'admin/UserManager/add',
