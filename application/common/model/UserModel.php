@@ -9,7 +9,9 @@ namespace app\common\model;
 use think\Model;
 
 class UserModel extends Model{
-    protected $table = "xqb_user";
+    protected $table = "xqb_users";
+    protected $hidden = ['passwd'];
+    protected $type = ['reg_time' => 'timestamp'];
 
     public function getUserList($where,$page){
         return $this->where($where)->select();
@@ -27,9 +29,9 @@ class UserModel extends Model{
         return $this->where(['id'=>$id])->delete();
     }
 
-
-    public function makePassword($password){
-        return md5($password);
+    public function encryptPassword($password) {
+        $salt =  config('encrypt.frontendsalt') ? config('encrypt.frontendsalt') : 'xqb';
+        return md5($salt.$password);
     }
 
 }

@@ -7,6 +7,8 @@
  */
 namespace app\home\controller;
 
+use think\Request;
+
 class User extends Base {
 
     public function user(){
@@ -15,7 +17,7 @@ class User extends Base {
 
 //    文章定位
     public function articleLocation()
-    {
+    {   
         return view();
     }
 

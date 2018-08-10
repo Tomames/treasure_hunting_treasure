@@ -15,12 +15,12 @@
     <h1 class="weui-header-title">定位登录</h1>
 </div>
 <div class="bd">
-    <div class="weui_cells_title">请输入用户名：</div>
+    <div class="weui_cells_title">请输入手机号：</div>
     <div class="weui_cells weui_cells_form">
         <div class="weui_cell">
             <div class="weui_cell_hd"></div>
             <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" type="text" name="username" id="username" value="" placeholder="请输入用户名">
+                <input class="weui_input" type="text" name="phone" id="phone" value="" placeholder="请输入手机号">
             </div>
         </div>
     </div>
@@ -35,14 +35,49 @@
     </div>
     <div class="weui_btn_area">
         <p style="font-size:9px;color: #04BE0f;">推荐使用微信或'手机浏览器'来使用我们软件</p>
+        {:token()}
         <a href="javascript:;" class="weui_btn weui_btn_primary" id="submit">登录</a>
         <br>
         <div class="button_sp_area" >
-            <div class="col-50"><a href="javascript:;" id="regist" class="weui_btn weui_btn_plain_primary">注册账号</a></div>
+            <div class="col-50"><a href="/register" id="regist" class="weui_btn weui_btn_plain_primary">注册账号</a></div>
         </div>
     </div>
 </div>
 
 
 </body>
+<script type="text/javascript" src="/static/Hui/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $(".weui_btn").click(function(){
+            var phone = $('#phone').val();
+            var password = $('#password').val();
+            var __token__ = $('input[name="__token__"]').val();
+            $.ajax({
+                url:"/user/login",
+                type:'post',
+                data:{phone:phone, password:password, __token__:__token__},
+                dataType:"json",
+                success:function (res) {
+                    console.log(res);
+                    if(res.code == 200){
+                        location.replace('/articleLocation');
+                    }else {
+                        layer.msg(res.message,{icon: 2, time: 1000},function(){
+                            location.reload('location.href');
+                        });
+                    }
+
+                },
+                error:function (res) {
+                    layer.msg('发送错误',{icon: 2, time: 1000},function(){
+                        location.reload('location.href');
+                    });
+                }
+            });
+        });
+
+    });
+
+</script>
 </html>

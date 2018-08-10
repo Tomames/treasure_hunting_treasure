@@ -260,6 +260,7 @@ return [
 
     //加盐加密
     'encrypt' =>[
-        'salt' => 'xqb',
+        'backendsalt' => 'adminxqb',
+        'frontendsalt' => 'xqb',
     ],
 ];

@@ -27,7 +27,7 @@
 			<div class="row cl">
 				<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
 				<div class="formControls col-xs-8">
-					<input id="username" name="username" type="text" placeholder="账户" class="input-text size-L">
+					<input id="username" name="username" type="text" placeholder="账户" value="{$Request.session.loginError.username}" class="input-text size-L">
 				</div>
 			</div>
 			<div class="row cl">
@@ -36,6 +36,13 @@
 					<input id="password" name="password" type="password" placeholder="密码" class="input-text size-L">
 				</div>
 			</div>
+			{if $Request.session.loginError.error}
+			<div class="row cl">
+				<div class="formControls col-xs-8 col-xs-offset-3">
+					<label class="label label-danger">{$Request.session.loginError.error}</label>
+				</div>
+			</div>	
+			{/if}
 			<div class="row cl">
 				<div class="formControls col-xs-8 col-xs-offset-3">
 					{:token()}

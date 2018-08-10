@@ -24,7 +24,7 @@ class AdminUserModel extends Model{
     }
 
     public function encryptPassword($password) {
-        $salt =  config('encrypt.salt') ? config('encrypt.salt') : 'xqb';
+        $salt =  config('encrypt.backendsalt') ? config('encrypt.backendsalt') : 'adminxqb';
         return md5($salt.$password);
     }
 

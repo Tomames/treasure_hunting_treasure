@@ -1,0 +1,161 @@
+{extend name="Public/base" /}
+{block name="title"}
+首页-后台管理
+{/block}
+{block name="body"}
+
+<section class="Hui-article-box">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资讯分类管理 <span
+            class="c-gray en">&gt;</span> 资讯分类列表<a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新"><i
+            class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="Hui-article">
+        <article class="cl pd-20">
+            <div class="cl pd-5 bg-1 bk-gray mt-20">
+                <span class="l">
+                    <a href="javascript:;" onclick="datadel()" class="btn btn-danger radius">
+                    <i class="Hui-iconfont">&#xe6e2;</i>
+                    批量删除
+                </a>
+                <a href="javascript:;" onclick="member_add('添加分类','/admin/type/create','','510')" class="btn btn-primary radius">
+                    <i class="Hui-iconfont">&#xe600;</i>
+                    添加资讯分类
+                </a>
+                </span>
+                <span class="r">共有数据：<strong>{$types|count}</strong> 条</span>
+            </div>
+            <div class="mt-20">
+                <table class="table table-border table-bordered table-hover table-bg table-sort">
+                    <thead>
+                    <tr class="text-c">
+                        <th width="25"><input type="checkbox" name="" value=""></th>
+                        <th width="40">ID</th>
+                        <th width="150">分类标题</th>
+                        <th width="80">是否上架</th>
+                        <th width="130">添加时间</th>
+                        <th width="130">修改时间</th>
+                        <th width="50">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {foreach name="types" item="type"}
+                    <tr class="text-c">
+                        <td><input type="checkbox" value="{$type.id}" name="id"></td>
+                        <td>{$type.id}</td>
+                        <td>{$type.name}</td>
+                        <td>{$type.state==1?'上架':'下架'}</td>
+                        <td>{$type.add_time}</td>
+                        <td>{$type.update_time}</td>
+                        <td class="td-manage">
+                            <a title="编辑" href="javascript:;" onclick="member_edit('编辑','/admin/type/edit?id={$type.id}','4','','510')"
+                               class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6df;</i></a>
+                            <a title="删除" href="javascript:;" onclick="member_del(this,'{$type.id}')" class="ml-5"
+                                    style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
+                    </tr>
+                    {/foreach}
+
+                    </tbody>
+                </table>
+            </div>
+        </article>
+    </div>
+</section>
+{/block}
+{block name="js"}
+<!--请在下方写此页面业务相关的脚本-->
+<script type="text/javascript" src="/static/Hui/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+<script type="text/javascript" src="/static/Hui/lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/static/Hui/lib/laypage/1.2/laypage.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.table-sort').dataTable({
+            "aaSorting": [[1, "desc"]],//默认第几个排序
+            "bStateSave": true,//状态保存
+            "aoColumnDefs": [
+                //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                {"orderable": false, "aTargets": [0]}// 制定列不参与排序
+            ]
+        });
+        $('.table-sort tbody').on('click', 'tr', function () {
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+            }
+            else {
+                $('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+            }
+        });
+    });
+
+    /*分类-添加*/
+    function member_add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
+
+
+    /*分类-编辑*/
+    function member_edit(title, url, id, w, h) {
+        layer_show(title, url, w, h);
+    }
+
+    /*分类-删除*/
+    function member_del(obj, id) {
+        layer.confirm('确认要删除吗？', function (index) {
+            $.ajax({
+                url:"/admin/type/delete",
+                type:'post',
+                data:{id:id},
+                dataType:"json",
+                success:function (res) {
+                    if(res.code == 200){
+                        $(obj).parents("tr").remove();
+                        layer.msg('已删除!', {icon: 1, time: 1000});
+                    }else {
+                        layer.msg(res.message,{icon: 2, time: 1000});
+                    }
+
+                },
+                error:function (res) {
+                    layer.msg('发送错误',{icon: 2, time: 1000});
+                }
+            });
+        });
+    }
+
+    function datadel() {
+        var ids = [];
+        $('table tbody tr').each(function () {
+            var $checkbox = $(this).find('input[name=id][type=checkbox]');
+            if ($checkbox.prop('disabled') || !$checkbox.prop('checked')) {
+                return;
+            }
+            if ($checkbox.val() == 0 || isNaN($checkbox.val())) {
+                return;
+            }
+            ids.push($checkbox.val())
+        });
+        console.log(ids);
+        layer.confirm('确认要删除吗？', function (index) {
+            $.ajax({
+                url:"/admin/type/delete",
+                type:'post',
+                data:{id:ids},
+                dataType:"json",
+                success:function (res) {
+                    if(res.code == 200){
+                        layer.msg('已删除!', {icon: 1, time: 1000}, function(){
+                            location.reload(location.href);
+                        });
+                    }else {
+                        layer.msg(res.message,{icon: 2, time: 1000});
+                    }
+
+                },
+                error:function (res) {
+                    layer.msg('发送错误',{icon: 2, time: 1000});
+                }
+            });
+        });
+    }
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+{/block}
